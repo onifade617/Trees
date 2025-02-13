@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Third-party
     "crispy_forms",
@@ -161,7 +162,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend', # new
 )
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ACCOUNT_SESSION_REMEMBER = True
 
@@ -173,3 +174,5 @@ ACCOUNT_EMAIL_REQUIRED = True # new
 ACCOUNT_UNIQUE_EMAIL = True # new
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = int(os.environ.get('DEBUG', default=0))
+
+DEFAULT_FROM_EMAIL = 'admin@africa_trees.com'
