@@ -26,6 +26,7 @@ urlpatterns = [
     # Local apps
     
     path('', include('pages.urls')),
+    path('trees/', include('trees.urls')),
 
     
 ]

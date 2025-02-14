@@ -1,0 +1,11 @@
+{% extends '_base.html' %}
+
+{% block title %}{{ tree.title }}{% endblock title %}
+
+{% block content %}
+<div class="tree-detail">
+    <h2><a href="">{{ tree.title }}</a></h2>
+    <p>Farmer: {{ tree.farmer }}</p>
+    <p>Price: {{ tree.price }}</p>
+</div>
+{% endblock content %}
