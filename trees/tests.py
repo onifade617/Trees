@@ -1,16 +1,31 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from .models import Tree
+from .models import Tree,Review
 
 # Create your tests here.
 class TreeTests(TestCase):
 
     def setUp(self):
+
+        self.user = get_user_model().objects.create_user( # new
+            username='reviewuser',
+            email='reviewuser@email.com',
+            password='testpass123'
+)
+
+
         self.tree = Tree.objects.create(
-        title='Harry Potter',
-        farmer='JK Rowling',
-        price='25.00',
+            title='Harry Potter',
+            farmer='JK Rowling',
+            price='25.00',
+        )
+
+        self.review = Review.objects.create( # new
+            tree = self.tree,
+            farmer = self.user,
+            review = 'An excellent review',
         )
 
     def test_tree_listing(self):
@@ -31,4 +46,5 @@ class TreeTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'Harry Potter')
+        self.assertContains(response, 'An excellent review')
         self.assertTemplateUsed(response, 'trees/tree_detail.html')
