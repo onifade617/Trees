@@ -1,9 +1,15 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}{{ tree.title }}{% endblock title %}
 
 {% block content %}
 <div class="tree-detail">
+    {% if tree.image and tree.image.url %}
+        <img class="treeimage" src="{{ tree.image.url }}" alt="{{ tree.title }}">
+    {% else %}
+        <img class="treeimage" src="{% static 'images/default_image.jpg' %}" alt="{{ tree.title }}">
+    {% endif %}
     <h2><a href="">{{ tree.title }}</a></h2>
     <p>Farmer: {{ tree.farmer }}</p>
     <p>Price: {{ tree.price }}</p>
@@ -11,7 +17,7 @@
         <h3>Reviews</h3>
         <ul>
             {% for review in tree.reviews.all %}
-            <li>{{ review.review }} ({{ review.author }})</li>
+            <li>{{ review.review }} {{ review.author }}</li>
             {% endfor %}
         </ul>
     </div>
