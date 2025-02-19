@@ -15,6 +15,11 @@ class Tree(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images/', blank = True, null = True)
 
+    class Meta: # new
+        permissions = [
+            ('special_status', 'Can see all trees'),
+        ]
+
     def __str__(self):
         return self.title
     
