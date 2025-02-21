@@ -3,6 +3,7 @@
 {% block title %}Trees{% endblock title %}
 
 {% block content %}
+<a href="{% url 'orders' %}" class="btn btn-success" >Purchase All Trees</a>
     {% for tree in tree_list %}
         <div>
             <h2><a href="{{tree.get_absolute_url}}">{{ tree.title }}</a></h2>

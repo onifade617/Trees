@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'trees.apps.TreesConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 
@@ -180,3 +181,7 @@ DEFAULT_FROM_EMAIL = 'admin@africa_trees.com'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Stripe
+STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY', "pk_test_51QusZeR05F0J61oseL9CaIY1pXJ61xiugXf9Ovg0KbNKNjQ3T6Arw1kMPsmbFofCtktD22FZD93oxJHqVjGdCFY400UlFTvZdI")
+STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY', 'sk_test_51QusZeR05F0J61osMc9xyAgeIaanOLZ6OpGrI3DIPj6P5Ya7xcsDVOGo0QZU7mbzl0cGNPk3zkwf1pQG9we67XSE007kY47v5s')

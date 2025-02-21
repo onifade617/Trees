@@ -29,6 +29,7 @@ urlpatterns = [
     
     path('', include('pages.urls')),
     path('trees/', include('trees.urls')),
+    path('orders/', include('orders.urls')),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
