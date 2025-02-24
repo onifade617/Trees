@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<h1>Search Results</h1>
+
+{% for tree in tree_list %}
+<div>
+<h3><a href="{{ tree.get_absolute_url }}">{{ tree.title }}</a></h3>
+<p>Farmer: {{ tree.farmer }}</p>
+<p>Price: $ {{ tree.price }}</p>
+</div>
+{% endfor %}
+{% endblock content %}
