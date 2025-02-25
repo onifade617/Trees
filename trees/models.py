@@ -8,6 +8,7 @@ from django.urls import reverse
 class Tree(models.Model):
     id = models.UUIDField( # new
         primary_key=True,
+        db_index=True,
         default=uuid.uuid4,
         editable=False)
     title = models.CharField(max_length=200)
@@ -16,6 +17,9 @@ class Tree(models.Model):
     image = models.ImageField(upload_to='images/', blank = True, null = True)
 
     class Meta: # new
+        indexes = [
+            models.Index(fields=['id'], name='id_index'),
+        ]
         permissions = [
             ('special_status', 'Can see all trees'),
         ]

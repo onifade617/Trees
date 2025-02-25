@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     "allauth",
     "allauth.account",
+    'debug_toolbar',
 
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
@@ -58,6 +59,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,7 +68,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'trees_project.urls'
 
@@ -185,3 +193,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Stripe
 STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY', "pk_test_51QusZeR05F0J61oseL9CaIY1pXJ61xiugXf9Ovg0KbNKNjQ3T6Arw1kMPsmbFofCtktD22FZD93oxJHqVjGdCFY400UlFTvZdI")
 STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY', 'sk_test_51QusZeR05F0J61osMc9xyAgeIaanOLZ6OpGrI3DIPj6P5Ya7xcsDVOGo0QZU7mbzl0cGNPk3zkwf1pQG9we67XSE007kY47v5s')
+
+# django-debug-toolbar
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
