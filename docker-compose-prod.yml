@@ -5,13 +5,12 @@ services:
     build: .
     command: python /Trees/manage.py runserver 0.0.0.0:8000
     environment:
-      - ENVIRONMENT=development
+      - ENVIRONMENT=production
       - SECRET_KEY=Ladyg71_dobs08_ay06
-      - DEBUG=1
+      - DEBUG=0
       - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51QusZeR05F0J61oseL9CaIY1pXJ61xiugXf9Ovg0KbNKNjQ3T6Arw1kMPsmbFofCtktD22FZD93oxJHqVjGdCFY400UlFTvZdI
       - STRIPE_TEST_SECRET_KEY=sk_test_51QusZeR05F0J61osMc9xyAgeIaanOLZ6OpGrI3DIPj6P5Ya7xcsDVOGo0QZU7mbzl0cGNPk3zkwf1pQG9we67XSE007kY47v5s
-    volumes:
-      - .:/Trees
+    
     ports:
       - 8000:8000
     depends_on:
@@ -19,14 +18,8 @@ services:
   
   db:
     image: postgres:latest
-    restart: always
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-
-volumes:
-  postgres_data:
+    
