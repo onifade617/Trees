@@ -3,7 +3,9 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python /Trees/manage.py runserver 0.0.0.0:8000
+    # command: python /Trees/manage.py runserver 0.0.0.0:8000
+    command: gunicorn trees_project.wsgi -b 0.0.0.0:8000
+    
     environment:
       - ENVIRONMENT=production
       - SECRET_KEY=Ladyg71_dobs08_ay06
