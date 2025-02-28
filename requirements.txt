@@ -1,0 +1,11 @@
+Django
+psycopg2
+django-crispy-forms
+crispy-bootstrap4
+django-allauth
+pillow
+stripe
+django-debug-toolbar
+whitenoise
+gunicorn
+dj-database-url
