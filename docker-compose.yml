@@ -3,17 +3,19 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python /Trees/manage.py runserver 0.0.0.0:8000
+    command: gunicorn trees_project.wsgi -b 0.0.0.0:8000
     environment:
-      - ENVIRONMENT=development
-      - SECRET_KEY=Ladyg71_dobs08_ay06
-      - DEBUG=1
-      - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51QusZeR05F0J61oseL9CaIY1pXJ61xiugXf9Ovg0KbNKNjQ3T6Arw1kMPsmbFofCtktD22FZD93oxJHqVjGdCFY400UlFTvZdI
-      - STRIPE_TEST_SECRET_KEY=sk_test_51QusZeR05F0J61osMc9xyAgeIaanOLZ6OpGrI3DIPj6P5Ya7xcsDVOGo0QZU7mbzl0cGNPk3zkwf1pQG9we67XSE007kY47v5s
+      - ENVIRONMENT=production
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=0
+      - ALLOWED_HOSTS=trees-production.up.railway.app
+      - DATABASE_URL=${DATABASE_URL}
+      - STRIPE_TEST_PUBLISHABLE_KEY=${STRIPE_TEST_PUBLISHABLE_KEY}
+      - STRIPE_TEST_SECRET_KEY=${STRIPE_TEST_SECRET_KEY}
     volumes:
       - .:/Trees
     ports:
-      - 8000:8000
+      - "${PORT:-8000}:8000"
     depends_on:
       - db
   
@@ -24,7 +26,6 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
